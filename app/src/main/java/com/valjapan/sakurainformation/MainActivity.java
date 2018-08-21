@@ -16,6 +16,7 @@ import com.nifty.cloud.mb.core.NCMBObject;
 import com.nifty.cloud.mb.core.NCMBQuery;
 
 import java.io.ByteArrayOutputStream;
+import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,8 +37,12 @@ public class MainActivity extends AppCompatActivity {
         NCMB.initialize(this, APPLICATAON_KEY, CLIENT_KEY);
         NCMBQuery<NCMBObject> query = new NCMBQuery<>("SakuraClass");
 
+
         //dataというフィールドがsakuraとなっているデータを検索する条件を設定
-        query.whereEqualTo("data", "sakura");
+//      query.whereContainedInArray("data", Arrays.asList("sakura",ORIGINAL_TEXT));
+
+        query.whereContainedInArray("data", Arrays.asList("eXbpFECaEavbYKUxVovx", ORIGINAL_TEXT));
+
 
         try {
             //データストアからデータを検索
@@ -51,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //表示データの追加方法
-        set("千葉工業大学", "image.jpg", R.drawable.cit_img);
+        set("千葉工業大学", "image.jpg", R.drawable.image);
 
     }
 

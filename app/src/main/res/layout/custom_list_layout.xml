@@ -8,7 +8,7 @@
         android:id="@+id/image"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/cit_img" />
+        android:src="@drawable/image" />
 
     <TextView
         android:id="@+id/name"
