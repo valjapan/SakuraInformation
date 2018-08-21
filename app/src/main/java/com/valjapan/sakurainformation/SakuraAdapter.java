@@ -52,6 +52,7 @@ public class SakuraAdapter extends ArrayAdapter<NCMBObject> {
 
     //    like数の送信
     private void addLike(String objectID, String likeNumber) {
+
 //        初期化
         NCMB.initialize(getContext(), MainActivity.APPLICATAON_KEY, MainActivity.CLIENT_KEY);
         NCMBObject obj = new NCMBObject("SakuraClass");
@@ -73,10 +74,10 @@ public class SakuraAdapter extends ArrayAdapter<NCMBObject> {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        final SakuraAdapter.ViewHolder viewHolder;
 
-//        convertViewは使い回しされている可能性があるのでnullの時だけ新しく作る
+        final ViewHolder viewHolder;
 
+        //convertViewは使い回しされている可能性があるのでnullの時だけ新しく作る
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.custom_list_layout, parent, false);
             viewHolder = new ViewHolder();
@@ -85,7 +86,9 @@ public class SakuraAdapter extends ArrayAdapter<NCMBObject> {
             viewHolder.like = (ImageView) convertView.findViewById(R.id.like);
             viewHolder.likeData = (TextView) convertView.findViewById(R.id.likeData);
             convertView.setTag(viewHolder);
+
         } else {
+
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
@@ -97,21 +100,24 @@ public class SakuraAdapter extends ArrayAdapter<NCMBObject> {
 
         viewHolder.like.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-//                Likeを押した時のLike数の変更
+            public void onClick(View view) {
+
+                //Likeを押した時のLike数の変更
                 int Like = Integer.parseInt(viewHolder.likeData.getText().toString()) + 1;
                 viewHolder.likeData.setText(String.valueOf(Like));
 
-//                Like数の送信
+                //Like数の送信
                 addLike(getItem(position).getObjectId(), String.valueOf(Like));
 
-//                Likeを押した時のアニメーション
+                //Likeを押した時のアニメーション
                 AlphaAnimation alpha = new AlphaAnimation(1, 0);
+                //透明度を1から0に変化させる
                 alpha.setDuration(500);
                 viewHolder.like.startAnimation(alpha);
 
             }
         });
+
         return convertView;
     }
 
